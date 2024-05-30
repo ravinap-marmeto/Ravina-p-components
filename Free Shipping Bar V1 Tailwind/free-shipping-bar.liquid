@@ -1,1 +1,49 @@
+{% comment %}
+Usage: 
+{% unless cart == empty %}
+    {% render 'free-shipping-bar' %}
+{% endunless %}
+{% endcomment %}
+{% if settings.enable_shipping_bar_v1 %}
+  {% comment %} ---- LOGIC START --- {% endcomment %}
+  {% liquid
+    assign free_shipping_threshold = settings.free_shipping_threshold | times: 1
+    assign cart_value = cart.total_price | divided_by: 100.00
+    assign change = free_shipping_threshold | minus: cart_value
+    assign percentage_change = 100
+    if change > 0
+      assign percentage_change = change | times: 100 | divided_by: free_shipping_threshold
 
+      assign percentage_change = 100 | minus: percentage_change
+    endif
+  %}
+
+  {% comment %} ---- LOGIC END --- {% endcomment %}
+
+  <shipping-bar-v1>
+    {% if settings.free_shipping_heading != blank %}
+      <div class="h4 tw-text-center">{{ settings.free_shipping_heading }}</div>
+    {% endif %}
+    <div
+      id="mm-shipping-bar-v1"
+      data-author="Ravina"
+      class="tw-h-[40px] tw-my-6 tw-relative tw-ml-[15px] tw-mr-[40px]"
+    >
+      {% if percentage_change == 100 and settings.shipping_message_after != blank %}
+        <div class="shipping-bar__message cart-drawer__black h6 tw-pb-2">
+          {{ settings.shipping_message_after }}
+        </div>
+      {% else %}
+        <div class="shipping-bar__message cart-drawer__black h6 tw-pb-2">
+          {{ settings.shipping_message_before }}
+        </div>
+      {% endif %}
+      <div class="tw-w-full tw-h-2 tw-rounded-full tw-bg-slate-200">
+        <div
+          style="width: {{ percentage_change }}%;"
+          class="tw-block tw-bg-green-700 tw-h-full tw-rounded-2xl"
+        ></div>
+      </div>
+    </div>
+  </shipping-bar-v1>
+{% endif %}

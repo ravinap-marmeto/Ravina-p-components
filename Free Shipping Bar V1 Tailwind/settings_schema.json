@@ -1,1 +1,39 @@
 
+{
+    "name": "Free shipping bar v1",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "SHIPPING BAR V1 Customization: This option can also be added under cart settings."
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_shipping_bar_v1",
+        "label": "Enable Shipping bar",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "free_shipping_heading",
+        "label": "Free shipping heading",
+        "default": "Free shipping bar"
+      },
+      {
+        "type": "text",
+        "id": "free_shipping_threshold",
+        "label": "Free shipping threshold"
+      },
+      {
+        "type": "text",
+        "id": "shipping_message_before",
+        "label": "Message before reaching the threshold",
+        "default": "Add more to get free shipping"
+      },
+      {
+        "type": "text",
+        "id": "shipping_message_after",
+        "label": "Message after reaching the threshold",
+        "default": "Got free shipping"
+      }
+    ]
+  }
