@@ -1,1 +1,21 @@
+<script src="{{ 'pincode-checker.js' | asset_url }}" defer="defer"></script>
 
+<h4 class="heading">{{ block.settings.heading }}</h4>
+
+<pincode-checker class="pincode-checker-wrapper">
+  <div class="field flex">
+    <input
+      id="pincode-{{ block.id }}"
+      type="text"
+      maxlength="6" 
+      pattern="^\d{6}$"
+      title="Please enter a valid 6-digit number"
+      class="field__input"
+      placeholder="Enter Pincode">
+    <label for="pincode-{{ block.id }}" class="field__label">{{ block.settings.placeholder_text }}</label>
+    <button class="button">{{ block.settings.button_text }}</button>
+  </div>
+  <p class="hidden success text-green-500 m-0" data-pincode-success>{{ block.settings.pincode_available_message }}</p>
+  <p class="hidden failure text-red-500 m-0" data-pincode-failure>{{ block.settings.pincode_unavailable_message }}</p>
+  <p class="hidden success text-green-500 m-0" data-pincode-estdelivery>Estimated Delivery Time: [est_Days]</p>
+</pincode-checker>
